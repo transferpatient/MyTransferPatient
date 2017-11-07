@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "883447705183",
+    "firebase_url": "https://transferpatient-e8385.firebaseio.com",
+    "project_id": "transferpatient-e8385",
+    "storage_bucket": "transferpatient-e8385.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883447705183:android:1e522c67e84365be",
+        "android_client_info": {
+          "package_name": "com.example.natthamondumrongkaviroyaphan.mytransferpatient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883447705183-f2uhr3etisfsobvdohqs01irlb12k4d4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.natthamondumrongkaviroyaphan.mytransferpatient",
+            "certificate_hash": "bdf645761ae198db98d65d35cb56c6cc78ddedfb"
+          }
+        },
+        {
+          "client_id": "883447705183-srtvkpp8khr41lh6nf1vt1r988vttafl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuIJ8cUo7aJiqXh0yZhzftJfogntd6Vgw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883447705183-srtvkpp8khr41lh6nf1vt1r988vttafl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
