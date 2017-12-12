@@ -20,6 +20,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class EmailPasswordActivity extends BaseActivity implements
@@ -40,12 +42,12 @@ public class EmailPasswordActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_password);
 
-        mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mActionBarToolbar = findViewById(R.id.toolbar);
         mActionBarToolbar.setTitle("Sign In");
         setSupportActionBar(mActionBarToolbar);
 
-        mEmailField = (EditText) findViewById(R.id.field_email);
-        mPasswordField = (EditText) findViewById(R.id.field_password);
+        mEmailField = findViewById(R.id.field_email);
+        mPasswordField = findViewById(R.id.field_password);
 
         // Buttons
         findViewById(R.id.email_sign_in_button).setOnClickListener(this);
@@ -210,8 +212,16 @@ public class EmailPasswordActivity extends BaseActivity implements
         hideProgressDialog();
         if (user != null) {
             if(user.isEmailVerified()){
-                Intent intent = new Intent(EmailPasswordActivity.this, MainChatActivity.class);
-                startActivity(intent);
+                String uid = user.getUid();
+                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference mUser = mDatabase.child("users").child(uid);
+                if(mUser == null){
+                    Intent intent = new Intent(EmailPasswordActivity.this, SetProfileActivity.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(EmailPasswordActivity.this, MainChatActivity.class);
+                    startActivity(intent);
+                }
             }else{
                 findViewById(R.id.field_email).setEnabled(false);
                 findViewById(R.id.field_password).setVisibility(View.GONE);
