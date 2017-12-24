@@ -3,6 +3,7 @@ package com.example.natthamondumrongkaviroyaphan.mytransferpatient;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -40,6 +42,7 @@ public class ContentMainFragment extends Fragment implements OnMapReadyCallback,
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
+    RelativeLayout layoutFare, layoutPatientProfile, layoutChatRoom, layoutAlertsSetting;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +50,34 @@ public class ContentMainFragment extends Fragment implements OnMapReadyCallback,
         View rootView = inflater.inflate(R.layout.content_main, container, false);
         mapFrag = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
+
+        layoutFare = (RelativeLayout) rootView.findViewById(R.id.layout_fare);
+        layoutFare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FareActivity.class);
+                // Intent intent = new Intent(getActivity(), FareSettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        layoutChatRoom = (RelativeLayout) rootView.findViewById(R.id.layout_chat_room);
+        layoutChatRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        layoutAlertsSetting = (RelativeLayout) rootView.findViewById(R.id.layout_alerts_setting);
+//        layoutAlertsSetting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), FareSettingActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         return rootView;
     }
 
@@ -196,7 +227,7 @@ public class ContentMainFragment extends Fragment implements OnMapReadyCallback,
 
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                   Log.i("Boom","permission denied");
+                    Log.i("Boom","permission denied");
                 }
                 return;
             }
