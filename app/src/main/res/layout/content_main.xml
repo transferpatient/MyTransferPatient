@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:id="@+id/menu_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/layout_fare"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backgroundWhite"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/layout_icon_fare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_fare">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/icon_margin"
+                        android:src="@drawable/ic_fare"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/layout_icon_fare"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        style="@style/TextMainMenu"
+                        android:text="Fare Setting" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorFare"/>
+                    <TextView
+                        style="@style/TextSubMenu"
+                        android:textColor="@color/colorFare"
+                        android:text="Dec 02 10:00 AM" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_patient_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backgroundWhite"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/layout_icon_patient_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_patient_profile">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/icon_margin"
+                        android:src="@drawable/ic_profile"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/layout_icon_patient_profile"
+                    android:orientation="vertical">
+                    <TextView
+                        style="@style/TextMainMenu"
+                        android:layout_marginLeft="5dp"
+                        android:text="Patient Profile" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorPatientProfile"/>
+                    <TextView
+                        style="@style/TextSubMenu"
+                        android:textColor="@color/colorPatientProfile"
+                        android:text="Somjai Sabuydee" />
+                </LinearLayout>
+            </RelativeLayout>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/layout_chat_room"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backgroundWhite"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/layout_icon_chat_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_chat_room">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/icon_margin"
+                        android:src="@drawable/ic_chat"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/layout_icon_chat_room"
+                    android:orientation="vertical">
+                    <TextView
+                        style="@style/TextMainMenu"
+                        android:layout_marginLeft="5dp"
+                        android:text="Chat Room" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorChatRoom"/>
+                    <TextView
+                        style="@style/TextSubMenu"
+                        android:textColor="@color/colorChatRoom"
+                        android:text="xx : I'm fine" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_alerts_setting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backgroundWhite"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/layout_icon_alerts_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_alerts_setting">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/icon_margin"
+                        android:src="@drawable/ic_notifications"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/layout_icon_alerts_setting"
+                    android:orientation="vertical">
+                    <TextView
+                        style="@style/TextMainMenu"
+                        android:layout_marginLeft="5dp"
+                        android:text="Alerts Setting" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorAlertsSetting"/>
+                    <TextView
+                        style="@style/TextSubMenu"
+                        android:textColor="@color/colorAlertsSetting"
+                        android:text="Spot Tracking" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </TableRow>
+    </TableLayout>
+    <LinearLayout
+        android:layout_above="@id/menu_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map"
+            tools:context=".MapLocationActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

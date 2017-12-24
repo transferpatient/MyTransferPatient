@@ -1,3 +1,4 @@
+/*
 package com.example.natthamondumrongkaviroyaphan.mytransferpatient;
 
 import android.content.Intent;
@@ -278,3 +279,4 @@ public class EmailPasswordActivity extends BaseActivity implements
         // [END sign_in_with_email]
     }
 }
+*/

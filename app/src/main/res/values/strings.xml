@@ -94,4 +94,14 @@
     <string name="title_activity_login2">Sign in</string>
     <string name="next_button">Next</string>
     <string name="your_name">Your Name</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_maps">Map</string>
+    <string-array name="navigation_drawer_items_array">
+        <item>Connect</item>
+        <item>Fixtures</item>
+        <item>Table</item>
+    </string-array>
+    <string name="edit"><u>EDIT</u></string>
 </resources>

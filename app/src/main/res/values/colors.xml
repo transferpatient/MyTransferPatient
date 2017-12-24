@@ -9,4 +9,14 @@
 
     <color name="grey_100">#F5F5F5</color>
     <color name="grey_300">#E0E0E0</color>
+
+    <color name="colorTextMenu">#FFFFFF</color>
+    <color name="backgroundWhite">#FFFFFF</color>
+    <color name="backgroundMenu">#4d4dff</color>
+    <color name="colorFare">#ff0066</color>
+    <color name="colorPatientProfile">#00ff00</color>
+    <color name="colorChatRoom">#ff9933</color>
+    <color name="colorAlertsSetting">#00cc99</color>
+    <color name="colorTextGrey">#5D5D5D</color>
+    <color name="colorTextBlack">#000000</color>
 </resources>
