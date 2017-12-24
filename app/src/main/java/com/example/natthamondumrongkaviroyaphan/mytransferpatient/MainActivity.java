@@ -13,79 +13,75 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
     private LinearLayout leftMenu;
-  //  private ListView mDrawerList;
+    private ListView listGroup;
+    ArrayList<String> dataGroup;
     Toolbar toolbar;
   //  private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
-    private Button btnGroup,btnCreateGroup,btnJoinGroup;
+    private Button btnCreateGroup,btnJoinGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     //    mTitle = mDrawerTitle = getTitle();
-        mNavigationDrawerItemTitles= getResources().getStringArray(R.array.navigation_drawer_items_array);
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         leftMenu = (LinearLayout) findViewById(R.id.left_drawer);
-        //mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        btnGroup = (Button) findViewById(R.id.btn_group);
-        btnGroup.setOnClickListener(this);
+        listGroup = (ListView) findViewById(R.id.list_group);
         btnCreateGroup = (Button) findViewById(R.id.btn_create_group);
         btnCreateGroup.setOnClickListener(this);
         btnJoinGroup = (Button) findViewById(R.id.btn_join_group);
         btnJoinGroup.setOnClickListener(this);
         setupToolbar();
 
-      //  DataModel[] drawerItem = new DataModel[3];
 
-      //  drawerItem[0] = new DataModel(R.drawable.ic_profile, "Connect");
-      //  drawerItem[1] = new DataModel(R.drawable.ic_chat, "Fixtures");
-      //  drawerItem[2] = new DataModel(R.drawable.ic_fare, "Table");
+        dataGroup = new ArrayList<String>();
+        dataGroup.add("Test#1");
+        dataGroup.add("Test#2");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        //DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
-        //mDrawerList.setAdapter(adapter);
-//        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, dataGroup);
+        listGroup.setAdapter(adapter);
+        listGroup.setOnItemClickListener(new DrawerItemClickListener());
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         setupDrawerToggle();
-        selectItem(0);
+        selectItem(0,dataGroup.get(0));
 
     }
 
     @Override
     public void onClick(View v) {
-        if (v.equals(btnGroup)) {
-            selectItem(0);
-        } else if (v.equals(btnCreateGroup)) {
-            selectItem(1);
+        if (v.equals(btnCreateGroup)) {
+            selectItem(1,"Create Group");
         } else if (v.equals(btnJoinGroup)){
-            selectItem(2);
+            selectItem(2,"Join Group");
         }
     }
 
-/*
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
+            selectItem(0,dataGroup.get(position));
         }
 
     }
-*/
 
-    private void selectItem(int position) {
-        Log.i("Boom","selectItem");
+
+    private void selectItem(int position,String name) {
         Fragment fragment = null;
-
         switch (position) {
             case 0:
                 fragment = new ContentMainFragment();
@@ -107,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
          //   mDrawerList.setItemChecked(position, true);
          //   mDrawerList.setSelection(position);
-            setTitle(mNavigationDrawerItemTitles[position]);
+            setTitle(name);
             mDrawerLayout.closeDrawer(leftMenu);
 
         } else {

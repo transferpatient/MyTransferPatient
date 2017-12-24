@@ -1,14 +1,14 @@
 package com.example.natthamondumrongkaviroyaphan.mytransferpatient;
 
-public class DataModel {
+public class ModelGroup {
 
-    public int icon;
+    public int id;
     public String name;
 
     // Constructor.
-    public DataModel(int icon, String name) {
+    public ModelGroup(int id, String name) {
 
-        this.icon = icon;
+        this.id = id;
         this.name = name;
     }
 }
