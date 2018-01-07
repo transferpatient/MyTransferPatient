@@ -37,9 +37,9 @@ public class SetProfileActivity extends AppCompatActivity {
             nextBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                //    writeNewUser(uid+ "", userName.getText().toString(), email);
-                //    Intent intent = new Intent(SetProfileActivity.this, MainChatActivity.class);
-                //    startActivity(intent);
+                    writeNewUser(uid+ "", userName.getText().toString(), email);
+                    Intent intent = new Intent(SetProfileActivity.this, MainActivity.class);
+                    startActivity(intent);
                 }
             });
         }

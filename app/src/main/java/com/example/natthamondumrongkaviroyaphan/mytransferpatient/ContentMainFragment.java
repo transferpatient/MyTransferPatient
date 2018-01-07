@@ -66,6 +66,7 @@ public class ContentMainFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
+                intent.putExtra("groupId", "1");
                 startActivity(intent);
             }
         });
