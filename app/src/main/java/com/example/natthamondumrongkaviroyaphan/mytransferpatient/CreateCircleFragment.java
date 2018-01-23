@@ -16,6 +16,8 @@ public class CreateCircleFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.create_circle, container, false);
 
+
+
         return rootView;
     }
 
