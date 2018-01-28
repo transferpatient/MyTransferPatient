@@ -13,16 +13,22 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
+    private static final String TAG = "MainActivity";
     private DrawerLayout mDrawerLayout;
     private LinearLayout leftMenu;
     private ListView listGroup;
-    ArrayList<String> dataGroup;
-    Toolbar toolbar;
+    ArrayList<String> dataGroup = new ArrayList<String>();
+    private Toolbar toolbar;
+
   //  private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
@@ -43,10 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnJoinGroup.setOnClickListener(this);
         setupToolbar();
 
-
-        dataGroup = new ArrayList<String>();
-        dataGroup.add("Test#1");
-        dataGroup.add("Test#2");
+        getGroupsName();
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -57,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         setupDrawerToggle();
         selectItem(0,dataGroup.get(0));
-
     }
 
     @Override
@@ -69,6 +71,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void getGroupsName(){
+        dataGroup.add("");
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        mRootRef.child("groups").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                dataGroup.clear();
+                for(DataSnapshot postSnapshot : snapshot.getChildren()){
+                    String groupName = postSnapshot.child("groupName").getValue(String.class);
+                    dataGroup.add(groupName);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "onCancelled: "+ databaseError);
+            }
+        });
+    }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
@@ -78,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
 
     private void selectItem(int position,String name) {
         Fragment fragment = null;
