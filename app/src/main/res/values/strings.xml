@@ -108,4 +108,7 @@
         <item>10</item>
     </string-array>
 
+    <string name="hint_group_name">group name</string>
+    <string name="title_activity_test">TestActivity</string>
+
 </resources>
