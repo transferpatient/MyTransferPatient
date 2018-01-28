@@ -43,10 +43,6 @@ public class ChatRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_room);
         onBindView();
 
-        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-        chatGroup = mRootRef.child("chat").child("1");
-
-
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentFirebaseUser != null) {
             uid = currentFirebaseUser.getUid();
@@ -58,6 +54,9 @@ public class ChatRoomActivity extends AppCompatActivity {
             groupId = bundle.getString("groupId");
         }
         Log.d(TAG, "groupId:" + groupId);
+
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        chatGroup = mRootRef.child("chat").child(groupId);
 
         mRootRef.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
