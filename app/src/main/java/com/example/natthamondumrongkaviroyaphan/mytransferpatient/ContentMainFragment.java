@@ -36,6 +36,7 @@ public class ContentMainFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
+    private static final String TAG = "ContentMainFragment";
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
     LocationRequest mLocationRequest;
@@ -50,6 +51,9 @@ public class ContentMainFragment extends Fragment implements OnMapReadyCallback,
         View rootView = inflater.inflate(R.layout.content_main, container, false);
         mapFrag = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
+
+        String groupId = getArguments().getString("groupId");
+        Log.d(TAG, "groupId: "+ groupId);
 
         layoutFare = (RelativeLayout) rootView.findViewById(R.id.layout_fare);
         layoutFare.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +70,7 @@ public class ContentMainFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
-                intent.putExtra("groupId", "1");
+                intent.putExtra("groupId", groupId);
                 startActivity(intent);
             }
         });

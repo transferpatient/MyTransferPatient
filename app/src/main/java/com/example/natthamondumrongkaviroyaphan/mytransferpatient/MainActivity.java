@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout mDrawerLayout;
     private LinearLayout leftMenu;
     private ListView listGroup;
-    ArrayList<String> dataGroup = new ArrayList<String>();
+    ArrayList<String> groupNameList = new ArrayList<String>();
+    ArrayList<String> groupIdList = new ArrayList<String>();
     private Toolbar toolbar;
 
   //  private CharSequence mDrawerTitle;
@@ -53,34 +54,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, dataGroup);
+        DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, groupNameList);
         listGroup.setAdapter(adapter);
         listGroup.setOnItemClickListener(new DrawerItemClickListener());
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         setupDrawerToggle();
-        selectItem(0,dataGroup.get(0));
+        selectItem(0, groupNameList.get(0));
     }
 
     @Override
     public void onClick(View v) {
         if (v.equals(btnCreateGroup)) {
-            selectItem(1,"Create Group");
+            selectItem(-1,"Create Group");
         } else if (v.equals(btnJoinGroup)){
-            selectItem(2,"Join Group");
+            selectItem(-2,"Join Group");
         }
     }
 
     private void getGroupsName(){
-        dataGroup.add("");
+        groupIdList.add("");
+        groupNameList.add("");
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         mRootRef.child("groups").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                dataGroup.clear();
+                groupIdList.clear();
+                groupNameList.clear();
                 for(DataSnapshot postSnapshot : snapshot.getChildren()){
+                    String key = postSnapshot.getKey();
                     String groupName = postSnapshot.child("groupName").getValue(String.class);
-                    dataGroup.add(groupName);
+                    groupIdList.add(key);
+                    groupNameList.add(groupName);
                 }
             }
             @Override
@@ -91,28 +96,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
-
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(0,dataGroup.get(position));
+            selectItem(position, groupNameList.get(position));
         }
-
     }
 
     private void selectItem(int position,String name) {
         Fragment fragment = null;
+        Bundle bundle = new Bundle();
         switch (position) {
-            case 0:
-                fragment = new ContentMainFragment();
-                break;
-            case 1:
+            case -1:
                 fragment = new CreateCircleFragment();
                 break;
-            case 2:
+            case -2:
                 fragment = new JoinCircleFragment();
                 break;
             default:
+                Log.d(TAG, "groupIdList: "+ groupIdList);
+                String groupId = groupIdList.get(position);
+                Log.d(TAG, "groupId: "+ groupId);
+                bundle.putString("groupId", groupId);
                 fragment = new ContentMainFragment();
+                fragment.setArguments(bundle);
                 break;
         }
 
