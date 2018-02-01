@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,15 +38,18 @@ public class CreateCircleFragment extends Fragment implements View.OnClickListen
             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             if(currentFirebaseUser != null) {
                 String userId = currentFirebaseUser.getUid();
-                createGroup(userId, groupName.getText().toString());
+                String key = createGroupName(userId, groupName.getText().toString());
+                createGroupChat(key);
+                Toast.makeText(getActivity(),"Create group completed",Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void createGroup(String userId, String groupName) {
+    private String createGroupName(String userId, String groupName) {
+        String key = "";
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference groups = mRootRef.child("groups");
-        String key = groups.push().getKey();
+        key = groups.push().getKey();
 
         HashMap<String, Object> postValues = new HashMap<>();
         postValues.put("createdById", userId);
@@ -54,5 +58,19 @@ public class CreateCircleFragment extends Fragment implements View.OnClickListen
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(key, postValues);
         groups.updateChildren(childUpdates);
+
+        return key;
+    }
+
+    private void createGroupChat(String key) {
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference chat = mRootRef.child("chat");
+
+        HashMap<String, Object> postValues = new HashMap<>();
+        postValues.put("chat", "initial");
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put(key, postValues);
+        chat.updateChildren(childUpdates);
     }
 }
