@@ -113,9 +113,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fragment = new JoinCircleFragment();
                 break;
             default:
-                Log.d(TAG, "groupIdList: "+ groupIdList);
+                Log.d("Boom", "groupIdList: "+ groupIdList);
                 String groupId = groupIdList.get(position);
-                Log.d(TAG, "groupId: "+ groupId);
+                Log.d("Boom", "groupId: "+ groupId);
                 bundle.putString("groupId", groupId);
                 fragment = new ContentMainFragment();
                 fragment.setArguments(bundle);

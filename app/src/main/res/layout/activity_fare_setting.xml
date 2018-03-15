@@ -10,11 +10,13 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal">
     <Button
+        android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CANCEL"
         android:layout_weight="1"/>
     <Button
+        android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SAVE"
@@ -40,6 +42,7 @@
               android:layout_margin="@dimen/icon_margin"
               android:layout_weight="1"/>
           <EditText
+              android:id="@+id/et_fare_name"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:hint="ชื่อ"
@@ -59,13 +62,34 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginRight="5dp"
-              android:text="เวลาเริ่มต้น"/>
+              android:text="วันที่เริ่มต้น"/>
           <TextView
+              android:id="@+id/et_start_date"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:gravity="right"
-              android:text="Mon, 6 November 10.00"/>
+              android:text="Mon, 6 November"/>
         </LinearLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chat"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/icon_margin"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:text="เวลา่เริ่มต้น"/>
+        <TextView
+            android:id="@+id/et_start_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00:00"/>
+      </LinearLayout>
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -83,7 +107,7 @@
             android:text="การแจ้งเตือน"/>
         <Spinner
             android:id="@+id/sp_num_noti"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:entries="@array/noti_arrays"
             android:prompt="@string/number" />

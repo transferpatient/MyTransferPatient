@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SetProfileActivity" />
-        <activity android:name=".FareSettingActivity" />
+        <activity android:name=".CreateFareActivity" />
         <activity android:name=".ChatRoomActivity" />
         <activity android:name=".FareActivity" />
         <activity android:name=".PatientProfileActivity" />

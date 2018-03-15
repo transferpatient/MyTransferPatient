@@ -30,6 +30,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ContentMainFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -44,6 +49,7 @@ public class ContentMainFragment extends Fragment implements OnMapReadyCallback,
     Location mLastLocation;
     Marker mCurrLocationMarker;
     RelativeLayout layoutFare, layoutPatientProfile, layoutChatRoom, layoutAlertsSetting;
+    String fareName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,15 +59,37 @@ public class ContentMainFragment extends Fragment implements OnMapReadyCallback,
         mapFrag.getMapAsync(this);
 
         String groupId = getArguments().getString("groupId");
-        Log.d(TAG, "groupId: "+ groupId);
+        Log.d("Boom", "groupId: "+ groupId);
 
         layoutFare = (RelativeLayout) rootView.findViewById(R.id.layout_fare);
         layoutFare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), FareActivity.class);
-                // Intent intent = new Intent(getActivity(), FareSettingActivity.class);
-                startActivity(intent);
+                Log.i("Boom","click fare");
+                fareName = "";
+                DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                mRootRef.child("groups").child(groupId).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                            fareName = dataSnapshot.child("fareName").getValue(String.class);
+                        Intent intent;
+
+                        if (null == fareName) {
+                            intent = new Intent(getActivity(), CreateFareActivity.class);
+                        } else {
+                            intent = new Intent(getActivity(), FareActivity.class);
+
+                        }
+                        intent.putExtra("groupId",groupId);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e(TAG, databaseError.getMessage());
+                    }
+                });
+
             }
         });
 
@@ -79,7 +107,7 @@ public class ContentMainFragment extends Fragment implements OnMapReadyCallback,
 //        layoutAlertsSetting.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), FareSettingActivity.class);
+//                Intent intent = new Intent(getActivity(), CreateFareActivity.class);
 //                startActivity(intent);
 //            }
 //        });
